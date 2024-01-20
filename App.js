@@ -1,75 +1,45 @@
 import React from 'react';
-import { View, StatusBar, StyleSheet, Image } from 'react-native';
-import MesRdv from './assets/bar/mesrdv.png';
-import OuDonner from './assets/bar/oudonner.png';
-import PuisJeDonner from './assets/bar/puisjedonner.png';
-import Plus from './assets/bar/plus.png';
+import { View, StatusBar, StyleSheet, Image, Touchable, TouchableOpacity } from 'react-native';
+
+import MapView from "react-native-maps";
+import { Marker } from 'react-native-maps';
+import { Polyline } from 'react-native-maps';
+import { Circle } from 'react-native-maps';
+
+import TopBar from './src/components/TopBar/TopBar';
+import ActionBar from './src/components/ActionBar/ActionBar';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
-      <View style={styles.actionBar}>
-          <View style={styles.line} />
-          <View style={styles.row}>
-            <Image source={OuDonner} style={styles.oudonner} />
-            <Image source={PuisJeDonner} style={styles.puisjedonner} />
-            <Image source={MesRdv} style={styles.mesrdv} />
-            <Image source={Plus} style={styles.plus} />
-          </View>
-      </View>
+      <TopBar />
+      <MapView
+        style={{ flex: 1,
+          width: '100%',
+          height: '100%',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+        }}
+        initialRegion={{
+          latitude: 37.78825,
+          longitude: -122.4324,
+          latitudeDelta: 0.0001,
+          longitudeDelta: 0.0001,
+        }}
+      />
+      <ActionBar />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  actionBar: {
-    flexDirection: "column",
-    height: "12%",
-    width: "100%",
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: "190%",
-  },
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
-  },
-  line: {
-    height: 0.5,
-    width: '100%',
-    backgroundColor: '#696969',
-  },
-  mesrdv: {
-    height: 75,
-    width: 75,
-    marginTop: -4,
-    resizeMode: 'contain',
-  },
-  oudonner: {
-    height: 75,
-    width: 75,
-    marginTop: -8,
-    resizeMode: 'contain',
-  },
-  puisjedonner: {
-    height: 100,
-    width: 100,
-    resizeMode: 'contain',
-  },
-  plus: {
-    height: 75,
-    width: 75,
-    marginTop: -8,
-    resizeMode: 'contain',
-  },
-  row: {
-    marginLeft: 15,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    width: '100%',
   },
 });
